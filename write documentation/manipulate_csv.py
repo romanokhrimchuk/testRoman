@@ -27,4 +27,8 @@ def read_the_csv(name_of_the_csv):
     the_csv = pd.read_csv(name_of_the_csv)
     return the_csv
 
-#    the_csv.plot()
+def plot_the_csv(the_csv):
+
+    the_csv.plot()
+#    how to save the figure in the format "yyyy_mm_dd-todays_csv.png"?
+#    also including a legend, a4 size and proper labels in the sides of the axes?
