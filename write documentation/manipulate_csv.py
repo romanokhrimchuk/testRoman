@@ -8,6 +8,8 @@ This is a temporary script file.
 import pandas as pd
 import numpy as np
 import os
+import matplotlib.pyplot as plt
+from datetime import datetime
 
 def create_dummy_csv(outname_csv='the_csv', output_path=None, 
                      random_seed=None, columns=["test1", "test2"], 
@@ -65,11 +67,18 @@ def read_the_csv(path_to_csv):
     the_csv = pd.read_csv(path_to_csv)
     return the_csv
 
-def plot_the_csv(the_csv):
-
+def plot_the_csv(the_csv, save_png=True, output_path = None):
+    
     the_csv.plot()
-#    how to save the figure in the format "yyyy_mm_dd-todays_csv.png"?
-#    also including a legend, a4 page size and proper labels in the sides of the axes?
+    fig = plt.figure(1)
+    lgd = fig.gca().legend(loc='upper center', bbox_to_anchor=(0.5, -0.07),  ncol=4)
+    plt.tight_layout(pad=1)
+    
+    if save_png == True:
+        png_save_path = output_path or os.getcwd()
+        png_save_path = os.path.join(png_save_path,datetime.today().strftime('%Y_%m_%d.png'))
+        plt.savefig(png_save_path, figsize=(8.27,11.69), dpi = 720, bbox_extra_artists=(lgd))
+        print("saved the png at {}".format(png_save_path))
 
 if __name__ == "__main__":
     output_path = r"C:\GitHub\exam\testRoman"
@@ -79,4 +88,4 @@ if __name__ == "__main__":
                      num_column_elements=30)
     
     the_csv = read_the_csv(name_of_the_csv)
-    plot_the_csv(the_csv)
+    plot_the_csv(the_csv,save_png=True,output_path=output_path)
