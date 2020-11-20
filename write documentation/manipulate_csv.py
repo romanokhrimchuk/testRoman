@@ -42,11 +42,27 @@ def create_dummy_csv(outname_csv='the_csv', output_path=None,
     csv_save_path = os.path.join(csv_save_path,outname_csv+'.csv')
     the_csv.to_csv((csv_save_path), index=False)
     print("saved the csv at {}".format(csv_save_path))
-    
     return True
 
-def read_the_csv(name_of_the_csv):
-    the_csv = pd.read_csv(name_of_the_csv)
+def read_the_csv(path_to_csv):
+    """
+    Read a comma-separated values (csv) file into DataFrame
+    
+    Parameters
+    ----------
+    path_to_csv : str, path object or file-like object
+        Any valid string path is acceptable. The string could be a URL. 
+        Valid URL schemes include http, ftp, s3, gs, and file. For 
+        file URLs, a host is expected. A local file could 
+        be: file://localhost/path/to/table.csv.
+        
+    Returns 
+    ------- 
+    the_csv : DataFrame or TextParser
+        A comma-separated values (csv) file is returned as
+        two-dimensional data structure with labeled axes.
+    """
+    the_csv = pd.read_csv(path_to_csv)
     return the_csv
 
 def plot_the_csv(the_csv):
