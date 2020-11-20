@@ -94,12 +94,12 @@ def plot_the_csv(the_csv, save_png=True, output_path = None):
 
 if __name__ == "__main__":
     
+    path_to_csv = r"C:\GitHub\exam\testRoman\the_csv.csv"
     output_path = r"C:\GitHub\exam\testRoman"
-    name_of_the_csv = r"C:\GitHub\exam\testRoman\the_csv.csv"
     
     create_dummy_csv(outname_csv='the_csv', output_path=output_path, 
                      random_seed=None, columns=["test1", "test2"], 
                      num_column_elements=30)
     
-    the_csv = read_the_csv(name_of_the_csv)
+    the_csv = read_the_csv(path_to_csv)
     plot_the_csv(the_csv,save_png=True,output_path=output_path)
