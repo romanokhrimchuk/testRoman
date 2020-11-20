@@ -7,20 +7,23 @@ This is a temporary script file.
 
 import pandas as pd
 import numpy as np
-from pathlib import Path
-LOC = Path(r"C:\Users\massetti\OneDrive - Sierentz & CIE\Documents\Python Scripts\testRoman")
+import os
 
-
-def create_dummy_csv(random_seed=3):
+def create_dummy_csv(outname_csv='the_csv', output_path=None, 
+                     random_seed=None, columns=["test1", "test2"], 
+                     num_column_elements=10):
     """
     @Roman could you please write the right documentation for this function?
 
     """
-    the_csv = pd.DataFrame(columns=["test1", "test2"])
-    the_csv["test1"] = np.random.rand(10, seed=random_seed)# not sure if the seed is a correct input to np.random.rand, could you check it for me please?
-    the_csv["test2"] = np.random.rand(10, seed=random_seed)
-    the_csv.to_csv(str(LOC / "write documentation" / "the_csv.csv"), index=False)
-    print("saved the csv at {}".format(LOC))#TODO! should I have LOC as an argument?
+    np.random.seed(random_seed)
+    the_csv = pd.DataFrame(columns = columns, data = np.random.rand(num_column_elements,len(columns)))
+    
+    csv_save_path = output_path or os.getcwd()
+    csv_save_path = os.path.join(csv_save_path,outname_csv+'.csv')
+    the_csv.to_csv((csv_save_path), index=False)
+    print("saved the csv at {}".format(csv_save_path))
+    
     return True
 
 def read_the_csv(name_of_the_csv):
@@ -34,7 +37,11 @@ def plot_the_csv(the_csv):
 #    also including a legend, a4 page size and proper labels in the sides of the axes?
 
 if __name__ == "__main__":
-
-    create_dummy_csv(1)
+    output_path = r"C:\GitHub\exam\testRoman"
+    name_of_the_csv = r"C:\GitHub\exam\testRoman\the_csv.csv"
+    create_dummy_csv(outname_csv='the_csv', output_path=output_path, 
+                     random_seed=None, columns=["test1", "test2"], 
+                     num_column_elements=30)
+    
     the_csv = read_the_csv(name_of_the_csv)
     plot_the_csv(the_csv)
