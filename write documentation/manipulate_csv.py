@@ -68,7 +68,19 @@ def read_the_csv(path_to_csv):
     return the_csv
 
 def plot_the_csv(the_csv, save_png=True, output_path = None):
+    """
+    The function for visualization  .csv fie with randomly generated dummy data
     
+    Parameters
+    ----------
+    the_csv : DataFrame, default None
+        The comma-separated values (csv) file reads into DataFrame
+    save_png : bool, default True
+        The parameter responsible for saving of picture
+    output_path : str, default None
+        The path where the figure will be save. Current working directory 
+        will be take as the path, if this parameter is not fill
+    """
     the_csv.plot()
     fig = plt.figure(1)
     lgd = fig.gca().legend(loc='upper center', bbox_to_anchor=(0.5, -0.07),  ncol=4)
@@ -81,8 +93,10 @@ def plot_the_csv(the_csv, save_png=True, output_path = None):
         print("saved the png at {}".format(png_save_path))
 
 if __name__ == "__main__":
+    
     output_path = r"C:\GitHub\exam\testRoman"
     name_of_the_csv = r"C:\GitHub\exam\testRoman\the_csv.csv"
+    
     create_dummy_csv(outname_csv='the_csv', output_path=output_path, 
                      random_seed=None, columns=["test1", "test2"], 
                      num_column_elements=30)
